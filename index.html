@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medical Parasitology Assessment — 50 MCQs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              800: '#163a5f',
+              900: '#0f2942',
+            },
+            teal: {
+              600: '#0d9488',
+              700: '#0f766e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+    @keyframes urgentPulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.45); }
+      50% { transform: scale(1.03); box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+    }
+    .timer-urgent {
+      animation: urgentPulse 1s infinite;
+    }
+    /* Custom scrollbar for question palette */
+    .palette-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .palette-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 8px;
+    }
+    .palette-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body class="min-h-screen antialiased selection:bg-teal-600 selection:text-white">
+
+  <!-- ==================== 1. START SCREEN ==================== -->
+  <section id="start-screen" class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+    <div class="w-full max-w-2xl bg-white rounded-3xl shadow-xl border border-slate-200/80 overflow-hidden">
+      <!-- Top Hero Banner -->
+      <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-teal-700 text-white px-6 py-10 sm:px-10 text-center">
+        <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm text-teal-100 text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-4">
+          Online Assessment Portal
+        </span>
+        <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight mb-2">
+          Medical Parasitology Assessment
+        </h1>
+        <p class="text-slate-200 text-sm sm:text-base max-w-lg mx-auto">
+          Comprehensive Multiple-Choice Examination • Randomized Question Order
+        </p>
+      </div>
+
+      <!-- Exam Info & Form -->
+      <div class="p-6 sm:p-10">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 text-center">
+            <div class="text-2xl font-extrabold text-navy-900">50</div>
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">Multiple-Choice Qs</div>
+          </div>
+          <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 text-center">
+            <div class="text-2xl font-extrabold text-teal-600">30:00</div>
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">Minutes Duration</div>
+          </div>
+          <div class="bg-slate-50 border border-slate-200/90 rounded-2xl p-4 text-center">
+            <div class="text-2xl font-extrabold text-navy-900">100%</div>
+            <div class="text-xs font-semibold text-slate-500 uppercase tracking-wide mt-1">Instant Answer Key</div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50/70 border border-amber-200/80 rounded-2xl p-4 mb-6 text-sm text-amber-900 space-y-1.5">
+          <p class="font-bold flex items-center gap-2">
+            <span>📋</span> Exam Instructions:
+          </p>
+          <ul class="list-disc list-inside text-amber-800/90 space-y-1 text-xs sm:text-sm">
+            <li>All 50 questions are randomly shuffled each time the exam starts.</li>
+            <li>The 30-minute timer begins immediately upon clicking <strong>Start Exam</strong> and submits automatically at <strong>00:00</strong>.</li>
+            <li>Full score, correct answers, and explanations appear immediately after submission.</li>
+          </ul>
+        </div>
+
+        <div class="mb-6">
+          <label for="student-name-input" class="block text-sm font-bold text-navy-900 mb-2">
+            Candidate Name <span class="text-slate-400 font-normal">(Optional)</span>
+          </label>
+          <input
+            type="text"
+            id="student-name-input"
+            placeholder="Enter your full name..."
+            class="w-full px-4 py-3.5 rounded-xl border-2 border-slate-200 text-slate-800 font-medium focus:outline-none focus:border-teal-600 transition"
+          />
+        </div>
+
+        <button
+          onclick="startExam()"
+          class="w-full py-4 px-6 rounded-xl bg-gradient-to-r from-teal-600 to-teal-700 hover:from-teal-700 hover:to-navy-900 text-white font-bold text-base sm:text-lg shadow-lg shadow-teal-600/25 transition-all active:scale-[0.99] cursor-pointer"
+        >
+          Start Exam Now →
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 2. EXAM SCREEN ==================== -->
+  <section id="exam-screen" class="hidden min-h-screen pb-12">
+    <!-- Sticky Top Bar -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+        <!-- Title & Student Name -->
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-navy-900 text-white flex items-center justify-center font-bold text-sm shrink-0">
+            MP
+          </div>
+          <div>
+            <div class="font-bold text-navy-900 text-sm sm:text-base leading-tight">Medical Parasitology Exam</div>
+            <div id="header-student-name" class="text-xs text-slate-500 font-medium">Candidate</div>
+          </div>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div
+          id="timer-badge"
+          class="flex items-center gap-2 bg-navy-900 text-white px-4 py-2 rounded-full font-extrabold text-base sm:text-lg tabular-nums tracking-wide shadow-sm transition-colors"
+        >
+          <span>⏱</span>
+          <span id="timer-text">30:00</span>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="hidden md:block flex-1 max-w-xs mx-2">
+          <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+            <span id="progress-label">Answered: 0 / 50</span>
+            <span id="progress-percent">0%</span>
+          </div>
+          <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-teal-600 rounded-full transition-all duration-300" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-2">
+          <button
+            id="view-toggle-btn"
+            onclick="toggleViewMode()"
+            class="px-3.5 py-2 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-xs sm:text-sm transition cursor-pointer"
+          >
+            All Questions
+          </button>
+          <button
+            onclick="openSubmitConfirm()"
+            class="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs sm:text-sm shadow-sm transition cursor-pointer"
+          >
+            Submit Exam
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Progress Bar -->
+      <div class="md:hidden px-4 pb-2.5">
+        <div class="flex justify-between text-[11px] font-bold text-slate-500 mb-1">
+          <span id="mobile-progress-label">Answered: 0 / 50</span>
+          <span id="mobile-progress-percent">0%</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+          <div id="mobile-progress-bar" class="h-full bg-teal-600 rounded-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="max-w-7xl mx-auto px-4 pt-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      <!-- Question Cards Area -->
+      <main id="questions-area" class="lg:col-span-8 space-y-5"></main>
+
+      <!-- Sidebar Question Navigator -->
+      <aside class="lg:col-span-4 bg-white rounded-2xl shadow-sm border border-slate-200 p-5 lg:sticky lg:top-24">
+        <div class="flex items-center justify-between mb-3">
+          <h2 class="font-bold text-navy-900 text-sm uppercase tracking-wider">Question Navigator</h2>
+          <span id="flagged-counter" class="text-xs font-semibold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+            0 Flagged
+          </span>
+        </div>
+
+        <!-- Legend -->
+        <div class="flex flex-wrap items-center gap-3 text-xs text-slate-500 mb-4 pb-3 border-b border-slate-100">
+          <span class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-teal-600 inline-block"></span> Answered
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-white border border-slate-300 inline-block"></span> Unanswered
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-3 h-3 rounded bg-amber-400 inline-block"></span> Flagged
+          </span>
+        </div>
+
+        <!-- 1-50 Grid -->
+        <div id="palette-grid" class="grid grid-cols-5 sm:grid-cols-10 lg:grid-cols-5 gap-2 max-h-96 overflow-y-auto palette-scroll pr-1"></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ==================== 3. RESULTS & REVIEW SCREEN ==================== -->
+  <section id="results-screen" class="hidden min-h-screen py-8 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Score Summary Card -->
+      <div class="bg-gradient-to-br from-navy-900 via-navy-800 to-teal-700 text-white rounded-3xl shadow-xl p-6 sm:p-10 text-center mb-8">
+        <span id="result-status-pill" class="inline-block bg-white/15 text-teal-100 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-3">
+          Exam Completed
+        </span>
+        <h2 id="result-candidate-name" class="text-xl sm:text-2xl font-bold text-slate-100 mb-4">Candidate</h2>
+
+        <div class="w-36 h-36 sm:w-40 sm:h-40 rounded-full bg-white/10 border-4 border-teal-300 flex flex-col items-center justify-center mx-auto my-4 shadow-inner">
+          <div id="result-score-fraction" class="text-3xl sm:text-4xl font-extrabold">0 / 50</div>
+          <div id="result-score-percent" class="text-sm sm:text-base font-bold text-teal-200 mt-1">0%</div>
+        </div>
+
+        <div class="my-3">
+          <span id="result-grade-badge" class="inline-block px-5 py-1.5 rounded-full text-sm font-extrabold">
+            Grade
+          </span>
+        </div>
+
+        <div class="flex flex-wrap justify-center gap-4 text-xs sm:text-sm text-slate-200 mt-4">
+          <span id="result-correct-stat" class="bg-white/10 px-3.5 py-1.5 rounded-xl font-semibold">✔ Correct: 0</span>
+          <span id="result-wrong-stat" class="bg-white/10 px-3.5 py-1.5 rounded-xl font-semibold">✖ Incorrect: 0</span>
+          <span id="result-time-stat" class="bg-white/10 px-3.5 py-1.5 rounded-xl font-semibold">⏱ Time: 00:00</span>
+        </div>
+
+        <div class="mt-7">
+          <button
+            onclick="startExam()"
+            class="px-6 py-3 rounded-xl bg-white text-navy-900 hover:bg-teal-50 font-bold text-sm sm:text-base shadow-md transition cursor-pointer"
+          >
+            ↻ Retake Exam (New Shuffle)
+          </button>
+        </div>
+      </div>
+
+      <!-- Review Filter Header -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 sm:p-5 mb-6 flex flex-wrap items-center justify-between gap-3">
+        <h3 class="font-extrabold text-navy-900 text-base sm:text-lg">Full Answer Key & Review</h3>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setReviewFilter('all', this)" class="rev-filter-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-navy-900 text-white cursor-pointer">
+            All (50)
+          </button>
+          <button onclick="setReviewFilter('wrong', this)" id="rev-wrong-btn" class="rev-filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+            Incorrect Only (0)
+          </button>
+          <button onclick="setReviewFilter('correct', this)" id="rev-correct-btn" class="rev-filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer">
+            Correct Only (0)
+          </button>
+        </div>
+      </div>
+
+      <!-- Detailed Review List -->
+      <div id="review-list" class="space-y-5"></div>
+    </div>
+  </section>
+
+  <!-- ==================== CUSTOM SUBMIT MODAL ==================== -->
+  <div id="submit-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 text-center">
+      <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mx-auto mb-4">
+        📝
+      </div>
+      <h3 class="text-xl font-extrabold text-navy-900 mb-2">Submit Your Exam?</h3>
+      <p id="submit-modal-text" class="text-sm text-slate-600 mb-6 leading-relaxed"></p>
+      <div class="flex gap-3">
+        <button
+          onclick="closeSubmitConfirm()"
+          class="flex-1 py-3 px-4 rounded-xl border border-slate-300 text-slate-700 font-bold text-sm hover:bg-slate-50 transition cursor-pointer"
+        >
+          Keep Reviewing
+        </button>
+        <button
+          onclick="finishExam(false)"
+          class="flex-1 py-3 px-4 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-sm shadow-md transition cursor-pointer"
+        >
+          Yes, Submit Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== 50 HIGH-YIELD MCQs (FROM ALL 4 PDFs, NO SOURCE LABELS) ====================
+    const QUESTION_BANK = [
+      {
+        q: "Which host harbors the mature (adult) stage of a parasite?",
+        options: ["Intermediate host", "Definitive host", "Vector", "Accidental host"],
+        answer: 1,
+        explanation: "The definitive host harbors the sexually mature (adult) stage of the parasite, whereas the intermediate host harbors immature (larval) stages."
+      },
+      {
+        q: "Invasion of the internal tissues of a host by an endoparasite is termed:",
+        options: ["Infestation", "Infection", "Zoonosis", "Autoinfection"],
+        answer: 1,
+        explanation: "Invasion by an endoparasite living inside the body is called infection, whereas surface habitation by an ectoparasite is called infestation."
+      },
+      {
+        q: "Which of the following is an example of a facultative parasite capable of living either parasitically or free-living?",
+        options: ["Pediculus humanus (lice)", "Strongyloides stercoralis", "Ascaris lumbricoides", "Enterobius vermicularis"],
+        answer: 1,
+        explanation: "Strongyloides stercoralis is a facultative parasite capable of both free-living and parasitic cycles."
+      },
+      {
+        q: "A parasite that causes disease only in immunodeficient individuals while remaining asymptomatic in immunocompetent hosts is classified as:",
+        options: ["Specific parasite", "Nonspecific parasite", "Opportunistic parasite", "Temporary parasite"],
+        answer: 2,
+        explanation: "Opportunistic parasites (such as Cryptosporidium) produce clinical disease only in immunocompromised individuals."
+      },
+      {
+        q: "According to binomial nomenclature in medical parasitology, how is a scientific name properly written?",
+        options: [
+          "Both genus and species start with capital letters",
+          "Genus starts with a capital letter and species starts with a small letter",
+          "Genus starts with a small letter and species starts with a capital letter",
+          "Both genus and species start with small letters"
+        ],
+        answer: 1,
+        explanation: "The genus name always begins with an initial capital letter and the species name with an initial small letter (e.g., Entamoeba histolytica)."
+      },
+      {
+        q: "Which parasite is most frequently transmitted via sexual contact?",
+        options: ["Trichomonas vaginalis", "Toxoplasma gondii", "Entamoeba histolytica", "Taenia solium"],
+        answer: 0,
+        explanation: "Trichomonas vaginalis is the most common parasite transmitted through sexual contact."
+      },
+      {
+        q: "Which of the following parasites can be transmitted by inhalation of airborne dust carrying the infective eggs?",
+        options: ["Fasciola hepatica", "Enterobius vermicularis", "Schistosoma mansoni", "Taenia saginata"],
+        answer: 1,
+        explanation: "Enterobius vermicularis eggs are lightweight and can be transmitted via inhalation of contaminated dust in addition to ingestion and autoinfection."
+      },
+      {
+        q: "All of the following are general characteristics of Class Trematoda EXCEPT:",
+        options: [
+          "Unsegmented leaf-shaped body (except schistosomes)",
+          "Presence of oral and ventral suckers",
+          "Absence of an anus; waste is excreted through the mouth",
+          "Complete alimentary canal with separate mouth and anus"
+        ],
+        answer: 3,
+        explanation: "Trematodes have an incomplete digestive tract without an anus; waste material is regurgitated through the mouth."
+      },
+      {
+        q: "Most trematodes are hermaphrodites EXCEPT:",
+        options: ["Fasciola hepatica", "Fasciola gigantica", "Schistosoma species", "Heterophyes heterophyes"],
+        answer: 2,
+        explanation: "Unlike other flukes, Schistosoma species have separate sexes (dioecious)."
+      },
+      {
+        q: "Which larval stage is completely ABSENT in the life cycle of Schistosoma?",
+        options: ["Miracidium", "Sporocyst", "Redia", "Cercaria"],
+        answer: 2,
+        explanation: "In Schistosoma, miracidia develop into mother and daughter sporocysts that directly produce cercariae without a redia stage."
+      },
+      {
+        q: "Which snails act as the intermediate host for Fasciola gigantica and Fasciola hepatica?",
+        options: ["Bulinus snails", "Biomphalaria snails", "Lymnaea snails", "Oncomelania snails"],
+        answer: 2,
+        explanation: "Freshwater snails of the genus Lymnaea (Lymnaea cailliaudi and Lymnaea truncatula) serve as intermediate hosts for Fasciola."
+      },
+      {
+        q: "What is the infective stage of Fasciola species for humans and herbivorous animals?",
+        options: ["Immature operculated egg", "Miracidium", "Free-swimming cercaria", "Encysted metacercaria"],
+        answer: 3,
+        explanation: "Infection occurs by ingesting aquatic vegetation (such as watercress) contaminated with encysted metacercariae."
+      },
+      {
+        q: "How can adult Fasciola gigantica be distinguished morphologically from Fasciola hepatica?",
+        options: [
+          "Smaller size, prominent shoulders, and converging margins",
+          "Larger size, less prominent shoulders, and parallel lateral margins",
+          "Presence of a terminal spine",
+          "Absence of an oral sucker"
+        ],
+        answer: 1,
+        explanation: "Fasciola gigantica is larger with less prominent shoulders and parallel margins, whereas F. hepatica has a marked cephalic cone, 2 prominent shoulders, and converging margins."
+      },
+      {
+        q: "Which description best matches the diagnostic egg of Fasciola found in stool?",
+        options: [
+          "150 × 90 µm, ovoid, bile-stained, thin-shelled, operculated, and immature",
+          "150 × 60 µm, translucent, non-operculated with a terminal spine",
+          "30–40 µm, spherical, brown with a radially striated embryophore",
+          "35–45 µm, colorless with polar filaments"
+        ],
+        answer: 0,
+        explanation: "Fasciola eggs measure 150 × 90 µm, are ovoid, yellowish-brown (bile-stained), operculated, and contain unembryonated (immature) cells when passed."
+      },
+      {
+        q: "The classic clinical tetrad suggestive of acute human fascioliasis consists of fever, hepatomegaly, right hypochondrial pain/tenderness, and:",
+        options: ["Terminal hematuria", "Marked eosinophilia", "Hydrocephalus", "Perianal pruritus"],
+        answer: 1,
+        explanation: "Fever, hepatomegaly, pain/tenderness in the right hypochondrium, and marked eosinophilia form the classic diagnostic tetrad of acute fascioliasis."
+      },
+      {
+        q: "What is the drug of choice for treating human fascioliasis?",
+        options: ["Praziquantel", "Triclabendazole", "Niclosamide", "Metronidazole"],
+        answer: 1,
+        explanation: "Triclabendazole is the drug of choice for fascioliasis, active against both immature migrating flukes and adult worms."
+      },
+      {
+        q: "Pseudo-fascioliasis (false fascioliasis) following ingestion of infected animal liver is excluded by repeating stool examination after a liver-free diet for:",
+        options: ["24 hours", "3 days", "One week", "One month"],
+        answer: 2,
+        explanation: "Spurious passage of Fasciola eggs after eating infected sheep or cattle liver is ruled out by re-testing stool after 1 week on a liver-free diet."
+      },
+      {
+        q: "Why does the genus name 'Schistosoma' mean 'fissured body'?",
+        options: [
+          "The female body splits longitudinally",
+          "The male body folds ventrally to form the gynaecophoric canal",
+          "The egg shell has a longitudinal cleft",
+          "The adult worm is segmented"
+        ],
+        answer: 1,
+        explanation: "The male schistosome's flattened body is ventrally incurved behind the ventral sucker, forming the gynaecophoric canal in which it carries the slender female."
+      },
+      {
+        q: "Which snail serves as the intermediate host for Schistosoma haematobium?",
+        options: ["Biomphalaria", "Bulinus", "Oncomelania", "Lymnaea"],
+        answer: 1,
+        explanation: "Bulinus snails are the intermediate hosts for S. haematobium, Biomphalaria for S. mansoni, and Oncomelania for S. japonicum."
+      },
+      {
+        q: "Where do adult Schistosoma mansoni worms normally reside in the human host?",
+        options: [
+          "Vesical and prostatic venous plexuses",
+          "Small branches of the inferior mesenteric venous plexus of the lower colon",
+          "Intrahepatic bile ducts",
+          "Pulmonary capillaries"
+        ],
+        answer: 1,
+        explanation: "Adult S. mansoni inhabit the small branches of the inferior mesenteric venous plexus draining the lower colon."
+      },
+      {
+        q: "Which morphological feature characterizes the adult male of Schistosoma mansoni?",
+        options: [
+          "4–5 testes and fine tegumental tubercles",
+          "6–9 testes and coarse tegumental tubercles",
+          "6–7 testes and smooth tegument (absent tubercles)",
+          "Single testis and segmented body"
+        ],
+        answer: 1,
+        explanation: "Male S. mansoni has 6–9 testes and coarse tubercles on its dorsal tegument (S. haematobium has 4–5 testes and fine tubercles; S. japonicum lacks tubercles)."
+      },
+      {
+        q: "Which egg morphology is diagnostic of Schistosoma haematobium in urine?",
+        options: [
+          "Oval egg (150 × 60 µm) with a terminal spine",
+          "Oval egg (140 × 60 µm) with a lateral spine",
+          "Round egg (60–100 µm) with a reduced lateral spine",
+          "Operculated ovoid egg"
+        ],
+        answer: 0,
+        explanation: "S. haematobium eggs are oval (150 × 60 µm), translucent, contain a miracidium, and have a characteristic terminal spine."
+      },
+      {
+        q: "Which Schistosoma species lays the highest number of eggs per female per day (~3,500 eggs/day) and has round eggs with a reduced lateral spine?",
+        options: ["Schistosoma haematobium", "Schistosoma mansoni", "Schistosoma japonicum", "Schistosoma intercalatum"],
+        answer: 2,
+        explanation: "Schistosoma japonicum females produce ~3,500 eggs/day; the eggs are round (60–100 µm) with a tiny/reduced lateral spine."
+      },
+      {
+        q: "How do humans become infected with Schistosoma species?",
+        options: [
+          "Ingestion of metacercariae on raw vegetables",
+          "Penetration of intact skin by free-swimming fork-tailed cercariae in fresh water",
+          "Bite of an infected mosquito",
+          "Ingestion of eggs in contaminated food"
+        ],
+        answer: 1,
+        explanation: "Free-swimming fork-tailed cercariae penetrate intact skin or mucous membranes using proteolytic enzymes from their preacetabular glands."
+      },
+      {
+        q: "Cercarial dermatitis ('swimmer's itch') occurs during which stage of schistosomiasis?",
+        options: ["Stage of invasion", "Stage of migration", "Acute egg deposition stage", "Chronic tissue reaction stage"],
+        answer: 0,
+        explanation: "Cercarial dermatitis is a localized hypersensitivity reaction (pruritus, erythema, maculopapular rash) at the site of cercarial skin penetration during invasion."
+      },
+      {
+        q: "Terminal hematuria, burning micturition, and suprapubic pain are classic symptoms of acute egg deposition in:",
+        options: ["Schistosoma mansoni", "Schistosoma haematobium", "Schistosoma japonicum", "Fasciola hepatica"],
+        answer: 1,
+        explanation: "Extrusion of S. haematobium eggs through the urinary bladder mucosa causes terminal hematuria, dysuria, frequency, and suprapubic pain."
+      },
+      {
+        q: "Which chronic complication is strongly associated with long-standing Schistosoma haematobium infection?",
+        options: ["Squamous cell carcinoma of the urinary bladder", "Esophageal varices", "Neurocysticercosis", "Anaphylactic shock"],
+        answer: 0,
+        explanation: "Chronic granulomatous inflammation, bilharzial nodules, papillomata, and sandy patches in the bladder wall predispose to bladder cancer."
+      },
+      {
+        q: "In the egg hatching test for schistosomiasis, viable eggs added to chlorine-free fresh water liberate active miracidia within:",
+        options: ["15 minutes", "6 hours", "24 hours", "1 week"],
+        answer: 0,
+        explanation: "Viable schistosome eggs hatch in fresh water within 15 minutes, releasing motile miracidia—useful for confirming active infection and treatment cure."
+      },
+      {
+        q: "What is the drug of choice effective against all human Schistosoma species?",
+        options: ["Triclabendazole", "Praziquantel", "Albendazole", "Niclosamide"],
+        answer: 1,
+        explanation: "Praziquantel is the drug of choice for all species of human schistosomiasis."
+      },
+      {
+        q: "Which of the following is true regarding the general structure of Class Cestoda (tapeworms)?",
+        options: [
+          "They possess a well-developed alimentary canal and circulatory system",
+          "They are hermaphroditic, segmented worms lacking an alimentary, respiratory, and circulatory system",
+          "They have separate male and female worms",
+          "Their body is unsegmented and cylindrical"
+        ],
+        answer: 1,
+        explanation: "Cestodes are flat, ribbon-like, segmented hermaphrodites that absorb nutrients through their tegument and lack digestive, respiratory, and circulatory systems."
+      },
+      {
+        q: "In a mature cestode proglottid, which reproductive organs appear first?",
+        options: ["Female organs (ovary and uterus)", "Male organs (testes)", "Both appear simultaneously", "Neither; organs only appear in gravid segments"],
+        answer: 1,
+        explanation: "Mature proglottids are hermaphroditic and protandrous—male reproductive organs differentiate before female organs."
+      },
+      {
+        q: "Which cestode is known as the 'unarmed' beef tapeworm?",
+        options: ["Taenia solium", "Taenia saginata", "Hymenolepis nana", "Echinococcus granulosus"],
+        answer: 1,
+        explanation: "Taenia saginata is called the unarmed tapeworm because its globular scolex has 4 suckers without a rostellum or hooks."
+      },
+      {
+        q: "How does the scolex of Taenia solium differ from that of Taenia saginata?",
+        options: [
+          "It has only 2 suckers",
+          "It possesses a rostellum armed with 2 rows of hooks",
+          "It lacks suckers completely",
+          "It has a rostellum with 1 row of hooks"
+        ],
+        answer: 1,
+        explanation: "Taenia solium ('armed' pork tapeworm) has 4 cup-like suckers plus a rostellum armed with 2 rows of hooks."
+      },
+      {
+        q: "How are gravid proglottids of Taenia saginata differentiated from those of Taenia solium?",
+        options: [
+          "T. saginata has 15–30 lateral uterine branches per side and detaches singly",
+          "T. saginata has 7–12 lateral uterine branches per side and detaches in groups",
+          "T. saginata has a rosette-shaped central uterus",
+          "T. saginata has bilateral genital pores"
+        ],
+        answer: 0,
+        explanation: "T. saginata gravid segments have 15–30 (average 18) lateral uterine branches per side and crawl out singly, whereas T. solium has 7–12 branches and detaches in groups."
+      },
+      {
+        q: "What is the infective stage of Taenia saginata for humans?",
+        options: ["Embryonated egg", "Cysticercus bovis", "Cysticercus cellulosae", "Cysticercoid larva"],
+        answer: 1,
+        explanation: "Humans acquire taeniasis saginata by eating raw or undercooked beef containing viable Cysticercus bovis."
+      },
+      {
+        q: "What is the most characteristic clinical complaint in Taenia saginata infection?",
+        options: [
+          "Discomfort and perianal pruritus caused by gravid segments crawling out of the anus",
+          "Severe hemolytic anemia",
+          "Jaundice and biliary colic",
+          "Epileptic seizures"
+        ],
+        answer: 0,
+        explanation: "Motile gravid segments of T. saginata actively migrate out of the anus during the day, causing anal discomfort and pruritus."
+      },
+      {
+        q: "Which laboratory method can differentiate the microscopically identical eggs of Taenia saginata and Taenia solium?",
+        options: [
+          "Routine saline wet mount",
+          "Ziehl-Neelsen acid-fast staining or molecular (PCR) techniques",
+          "Egg hatching test",
+          "Sputum microscopy"
+        ],
+        answer: 1,
+        explanation: "Taenia eggs look identical on standard microscopy (30–40 µm, brown radially striated embryophore with hexacanth embryo), requiring Ziehl-Neelsen staining or PCR probes to distinguish species."
+      },
+      {
+        q: "Human cysticercosis develops when a person acts as an intermediate host after ingesting:",
+        options: [
+          "Cysticercus bovis in beef",
+          "Cysticercus cellulosae in pork",
+          "Embryonated eggs of Taenia solium (or via autoinfection)",
+          "Hydatid fluid"
+        ],
+        answer: 2,
+        explanation: "Ingesting T. solium eggs (via contaminated food/water or internal/external autoinfection) leads to larval cysticercus development in human tissues."
+      },
+      {
+        q: "Which manifestation of human cysticercosis carries the highest morbidity (causing headache, epilepsy, or hydrocephalus)?",
+        options: ["Subcutaneous nodules", "Muscular cysticercosis", "Neurocysticercosis (CNS involvement)", "Ocular cysticercosis"],
+        answer: 2,
+        explanation: "Neurocysticercosis (central nervous system involvement) carries the highest morbidity and presents with headache, seizures/epilepsy, or hydrocephalus."
+      },
+      {
+        q: "Why is Niclosamide CONTRAINDICATED in the treatment of intestinal Taenia solium infection?",
+        options: [
+          "It causes severe renal toxicity",
+          "It disintegrates the worm in the intestine, releasing eggs and increasing the risk of autoinfection and cysticercosis",
+          "It is ineffective against adult tapeworms",
+          "It induces severe bronchospasm"
+        ],
+        answer: 1,
+        explanation: "Niclosamide dissolves/disintegrates the adult worm inside the bowel, liberating viable eggs that can cause internal autoinfection and cysticercosis."
+      },
+      {
+        q: "Which freezing protocol kills Taenia cysticerci in infected meat?",
+        options: ["0°C for 10 days", "-10°C for 10 days", "4°C for 14 days", "-2°C for 2 days"],
+        answer: 1,
+        explanation: "Freezing meat at -10°C for 10 days (or cooking to at least 56°C internal temperature) kills cysticerci; they can survive up to 70 days at 0°C."
+      },
+      {
+        q: "Which cestode is the smallest tapeworm infecting humans (1–4 cm) and the most common human tapeworm worldwide?",
+        options: ["Hymenolepis diminuta", "Hymenolepis nana", "Taenia solium", "Echinococcus granulosus"],
+        answer: 1,
+        explanation: "Hymenolepis nana (dwarf tapeworm) measures 1–4 cm and is the most prevalent human tapeworm globally, particularly among children."
+      },
+      {
+        q: "Which microscopic feature distinguishes the egg of Hymenolepis nana?",
+        options: [
+          "Colorless shell with two polar thickenings giving rise to numerous polar filaments",
+          "Brownish shell with polar thickenings and NO polar filaments",
+          "Thick radially striated shell without polar thickenings",
+          "Prominent terminal spine"
+        ],
+        answer: 0,
+        explanation: "H. nana eggs (35–45 µm) are colorless/translucent and feature two polar thickenings from which 4–8 polar filaments arise."
+      },
+      {
+        q: "Why should treatment for Hymenolepis nana be repeated after 2–3 weeks?",
+        options: [
+          "To kill larvae emerging from the intestinal villi/submucosa into the lumen",
+          "Because Praziquantel requires 3 weeks to absorb",
+          "To eliminate adult worms in the bile ducts",
+          "Because eggs hatch in the liver after 2 weeks"
+        ],
+        answer: 0,
+        explanation: "Repeating treatment after 2–3 weeks destroys newly matured worms emerging from cysticercoids embedded in the intestinal villi, and all family members should be treated simultaneously."
+      },
+      {
+        q: "How is Hymenolepis diminuta (rat tapeworm) distinguished from Hymenolepis nana?",
+        options: [
+          "H. diminuta has an unarmed rostellum (no hooks), requires a rat flea intermediate host, and has brownish eggs with NO polar filaments",
+          "H. diminuta is smaller (1 cm) and has 2 rows of hooks",
+          "H. diminuta requires no intermediate host",
+          "H. diminuta is transmitted by skin penetration"
+        ],
+        answer: 0,
+        explanation: "H. diminuta measures 20–90 cm, has an unarmed rostellum without hooks, obligately requires a rat flea intermediate host, and lays brownish eggs (55 × 70 µm) lacking polar filaments."
+      },
+      {
+        q: "Who is the definitive host of Echinococcus granulosus?",
+        options: ["Humans", "Sheep and cattle", "Dogs, foxes, and other canines", "Pigs"],
+        answer: 2,
+        explanation: "Dogs and other canines harbor the tiny adult Echinococcus granulosus (3–6 mm, 3 segments) in their small intestine."
+      },
+      {
+        q: "How do humans acquire Hydatid disease (Echinococcosis)?",
+        options: [
+          "Eating undercooked sheep liver containing hydatid cysts",
+          "Ingesting Echinococcus granulosus eggs from contaminated food/water or handling infected dogs",
+          "Skin penetration by cercariae",
+          "Bite of a Culex mosquito"
+        ],
+        answer: 1,
+        explanation: "Humans become accidental intermediate hosts by ingesting E. granulosus eggs passed in dog feces (via contaminated vegetables/water or petting infected dogs)."
+      },
+      {
+        q: "Which organ is the most common site for hydatid cysts in humans (~70% of cases)?",
+        options: ["Lungs (70%)", "Brain (70%)", "Liver (70%)", "Kidneys (70%)"],
+        answer: 2,
+        explanation: "The liver is the primary filter and most frequent site (~70%), followed by the lungs (~20%), and other organs (~10%)."
+      },
+      {
+        q: "What constitutes 'hydatid sand' inside a fertile hydatid cyst?",
+        options: [
+          "Calcified host fibrous tissue",
+          "Detached protoscolices, brood capsules, and daughter cysts settled in the hydatid fluid",
+          "Bile pigments and cholesterol crystals",
+          "Dead miracidia"
+        ],
+        answer: 1,
+        explanation: "Hydatid sand consists of free protoscolices, brood capsules, and small daughter cysts detached from the germinal layer and suspended in hydatid fluid."
+      },
+      {
+        q: "What is the most dangerous acute complication of spontaneous or intraoperative rupture of a hydatid cyst?",
+        options: [
+          "Severe allergic reaction (anaphylactic shock) and secondary cyst dissemination",
+          "Terminal hematuria",
+          "Perianal pruritus",
+          "Pseudo-fascioliasis"
+        ],
+        answer: 0,
+        explanation: "Rupture spills highly antigenic hydatid fluid into the body, precipitating life-threatening anaphylactic shock and seeding protoscolices into new organs."
+      }
+    ];
+
+    // ==================== STATE ====================
+    let activeQuestions = [];
+    let answers = {}; // qIndex -> chosenOptionIndex
+    let flagged = new Set();
+    let currentIndex = 0;
+    let isAllView = false;
+    let timerId = null;
+    let timeLeft = 30 * 60; // 1800 seconds
+    let examStartTime = 0;
+    let candidateName = "Candidate";
+    const OPTION_LABELS = ["A", "B", "C", "D"];
+
+    // ==================== HELPERS ====================
+    function shuffle(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function formatTime(sec) {
+      const m = Math.floor(sec / 60);
+      const s = sec % 60;
+      return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+
+    // ==================== EXAM LIFECYCLE ====================
+    function startExam() {
+      const rawName = document.getElementById("student-name-input").value.trim();
+      candidateName = rawName || "Candidate";
+
+      // Always randomize all 50 questions across the 4 topics
+      activeQuestions = shuffle(QUESTION_BANK);
+      answers = {};
+      flagged = new Set();
+      currentIndex = 0;
+      isAllView = false;
+      timeLeft = 30 * 60;
+      examStartTime = Date.now();
+
+      document.getElementById("header-student-name").textContent = candidateName;
+      document.getElementById("view-toggle-btn").textContent = "All Questions";
+
+      document.getElementById("start-screen").classList.add("hidden");
+      document.getElementById("results-screen").classList.add("hidden");
+      document.getElementById("exam-screen").classList.remove("hidden");
+
+      buildNavigator();
+      renderQuestions();
+      updateProgressUI();
+      startCountdown();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function startCountdown() {
+      clearInterval(timerId);
+      updateTimerDisplay();
+      timerId = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+          timeLeft = 0;
+          updateTimerDisplay();
+          clearInterval(timerId);
+          finishExam(true);
+          return;
+        }
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const timerText = document.getElementById("timer-text");
+      const timerBadge = document.getElementById("timer-badge");
+      timerText.textContent = formatTime(timeLeft);
+
+      timerBadge.classList.remove("bg-navy-900", "bg-amber-600", "bg-rose-600", "timer-urgent");
+      if (timeLeft <= 180) {
+        timerBadge.classList.add("bg-rose-600", "timer-urgent");
+      } else if (timeLeft <= 300) {
+        timerBadge.classList.add("bg-amber-600");
+      } else {
+        timerBadge.classList.add("bg-navy-900");
+      }
+    }
+
+    // ==================== NAVIGATOR PALETTE ====================
+    function buildNavigator() {
+      const grid = document.getElementById("palette-grid");
+      grid.innerHTML = "";
+      activeQuestions.forEach((_, idx) => {
+        const btn = document.createElement("button");
+        btn.id = `nav-btn-${idx}`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => goToQuestion(idx);
+        grid.appendChild(btn);
+      });
+      refreshNavigatorStyles();
+    }
+
+    function refreshNavigatorStyles() {
+      activeQuestions.forEach((_, idx) => {
+        const btn = document.getElementById(`nav-btn-${idx}`);
+        if (!btn) return;
+
+        const isAnswered = answers[idx] !== undefined;
+        const isFlagged = flagged.has(idx);
+        const isCurrent = !isAllView && idx === currentIndex;
+
+        let base = "h-9 rounded-lg text-xs font-bold transition-all cursor-pointer border ";
+        if (isAnswered) {
+          base += "bg-teal-600 text-white border-teal-600 ";
+        } else if (isFlagged) {
+          base += "bg-amber-100 text-amber-800 border-amber-400 ";
+        } else {
+          base += "bg-white text-slate-700 border-slate-200 hover:border-teal-600 ";
+        }
+
+        if (isAnswered && isFlagged) {
+          base += "ring-2 ring-amber-400 ";
+        } else if (isCurrent) {
+          base += "ring-2 ring-navy-900 ring-offset-1 ";
+        }
+
+        btn.className = base;
+      });
+
+      document.getElementById("flagged-counter").textContent = `${flagged.size} Flagged`;
+    }
+
+    function goToQuestion(idx) {
+      currentIndex = idx;
+      if (isAllView) {
+        const el = document.getElementById(`question-card-${idx}`);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        renderQuestions();
+      }
+      refreshNavigatorStyles();
+    }
+
+    function toggleViewMode() {
+      isAllView = !isAllView;
+      document.getElementById("view-toggle-btn").textContent = isAllView ? "One by One" : "All Questions";
+      renderQuestions();
+      refreshNavigatorStyles();
+    }
+
+    // ==================== RENDER QUESTIONS ====================
+    function renderQuestions() {
+      const container = document.getElementById("questions-area");
+      container.innerHTML = "";
+
+      if (isAllView) {
+        activeQuestions.forEach((item, idx) => {
+          container.appendChild(buildQuestionCard(item, idx, true));
+        });
+      } else {
+        container.appendChild(buildQuestionCard(activeQuestions[currentIndex], currentIndex, false));
+      }
+    }
+
+    function buildQuestionCard(item, idx, listMode) {
+      const card = document.createElement("div");
+      card.id = `question-card-${idx}`;
+      card.className = "bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-7 transition-all";
+
+      const chosen = answers[idx];
+      const isFlagged = flagged.has(idx);
+
+      const optionsHTML = item.options
+        .map((opt, optIdx) => {
+          const selected = chosen === optIdx;
+          const btnClass = selected
+            ? "border-teal-600 bg-teal-50/80 text-navy-900 font-semibold shadow-xs"
+            : "border-slate-200 bg-white hover:border-teal-500 hover:bg-slate-50/80 text-slate-700";
+          const letterClass = selected
+            ? "bg-teal-600 text-white"
+            : "bg-slate-100 text-navy-900";
+
+          return `
+            <button
+              type="button"
+              onclick="chooseOption(${idx}, ${optIdx})"
+              class="w-full text-left p-3.5 sm:p-4 rounded-xl border-2 flex items-center gap-3.5 transition-all cursor-pointer ${btnClass}"
+            >
+              <span class="w-8 h-8 rounded-lg flex items-center justify-center font-extrabold text-sm shrink-0 transition-colors ${letterClass}">
+                ${OPTION_LABELS[optIdx]}
+              </span>
+              <span class="text-sm sm:text-base leading-snug">${opt}</span>
+            </button>
+          `;
+        })
+        .join("");
+
+      const flagBtnClass = isFlagged
+        ? "bg-amber-500 text-white border-amber-500"
+        : "bg-amber-50 text-amber-700 border-amber-200 hover:bg-amber-100";
+
+      const footerHTML = listMode
+        ? `
+          <div class="mt-5 pt-4 border-t border-slate-100 flex justify-end">
+            <button
+              type="button"
+              onclick="toggleFlag(${idx})"
+              class="px-3.5 py-2 rounded-xl border text-xs font-bold transition cursor-pointer ${flagBtnClass}"
+            >
+              🚩 ${isFlagged ? "Flagged for Review" : "Flag Question"}
+            </button>
+          </div>
+        `
+        : `
+          <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+              <button
+                type="button"
+                onclick="prevQ()"
+                ${idx === 0 ? "disabled" : ""}
+                class="px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-700 font-bold text-xs sm:text-sm hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition cursor-pointer"
+              >
+                ← Previous
+              </button>
+              <button
+                type="button"
+                onclick="toggleFlag(${idx})"
+                class="px-3.5 py-2.5 rounded-xl border text-xs sm:text-sm font-bold transition cursor-pointer ${flagBtnClass}"
+              >
+                🚩 ${isFlagged ? "Flagged" : "Flag"}
+              </button>
+            </div>
+
+            <div>
+              ${
+                idx < activeQuestions.length - 1
+                  ? `<button
+                      type="button"
+                      onclick="nextQ()"
+                      class="px-5 py-2.5 rounded-xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs sm:text-sm shadow-xs transition cursor-pointer"
+                    >
+                      Next →
+                    </button>`
+                  : `<button
+                      type="button"
+                      onclick="openSubmitConfirm()"
+                      class="px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs sm:text-sm shadow-sm transition cursor-pointer"
+                    >
+                      Finish & Submit ✔
+                    </button>`
+              }
+            </div>
+          </div>
+        `;
+
+      card.innerHTML = `
+        <div class="flex items-center justify-between gap-2 pb-3.5 mb-4 border-b border-slate-100">
+          <span class="inline-flex items-center px-3 py-1 rounded-lg bg-navy-900 text-white text-xs font-bold">
+            Question ${idx + 1} of ${activeQuestions.length}
+          </span>
+          ${chosen !== undefined ? '<span class="text-xs font-bold text-teal-600">✔ Answered</span>' : '<span class="text-xs font-medium text-slate-400">Select an option</span>'}
+        </div>
+        <h3 class="text-base sm:text-lg font-bold text-navy-900 mb-5 leading-relaxed">
+          ${item.q}
+        </h3>
+        <div class="space-y-3">
+          ${optionsHTML}
+        </div>
+        ${footerHTML}
+      `;
+
+      return card;
+    }
+
+    function chooseOption(qIdx, optIdx) {
+      answers[qIdx] = optIdx;
+      updateProgressUI();
+      refreshNavigatorStyles();
+
+      if (isAllView) {
+        const oldCard = document.getElementById(`question-card-${qIdx}`);
+        if (oldCard) {
+          oldCard.replaceWith(buildQuestionCard(activeQuestions[qIdx], qIdx, true));
+        }
+      } else {
+        renderQuestions();
+      }
+    }
+
+    function toggleFlag(qIdx) {
+      if (flagged.has(qIdx)) flagged.delete(qIdx);
+      else flagged.add(qIdx);
+      refreshNavigatorStyles();
+      if (isAllView) {
+        const oldCard = document.getElementById(`question-card-${qIdx}`);
+        if (oldCard) {
+          oldCard.replaceWith(buildQuestionCard(activeQuestions[qIdx], qIdx, true));
+        }
+      } else {
+        renderQuestions();
+      }
+    }
+
+    function prevQ() {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestions();
+        refreshNavigatorStyles();
+      }
+    }
+
+    function nextQ() {
+      if (currentIndex < activeQuestions.length - 1) {
+        currentIndex++;
+        renderQuestions();
+        refreshNavigatorStyles();
+      }
+    }
+
+    function updateProgressUI() {
+      const answeredCount = Object.keys(answers).length;
+      const total = activeQuestions.length;
+      const pct = Math.round((answeredCount / total) * 100);
+
+      document.getElementById("progress-label").textContent = `Answered: ${answeredCount} / ${total}`;
+      document.getElementById("progress-percent").textContent = `${pct}%`;
+      document.getElementById("progress-bar").style.width = `${pct}%`;
+
+      document.getElementById("mobile-progress-label").textContent = `Answered: ${answeredCount} / ${total}`;
+      document.getElementById("mobile-progress-percent").textContent = `${pct}%`;
+      document.getElementById("mobile-progress-bar").style.width = `${pct}%`;
+    }
+
+    // ==================== SUBMIT & RESULTS ====================
+    function openSubmitConfirm() {
+      const answeredCount = Object.keys(answers).length;
+      const unanswered = activeQuestions.length - answeredCount;
+      const modalText = document.getElementById("submit-modal-text");
+
+      if (unanswered > 0) {
+        modalText.innerHTML = `You have answered <strong>${answeredCount}</strong> out of <strong>${activeQuestions.length}</strong> questions.<br><span class="text-rose-600 font-bold">${unanswered} question(s) are still unanswered.</span><br>Are you sure you want to submit now?`;
+      } else {
+        modalText.innerHTML = `You have answered all <strong>${activeQuestions.length}</strong> questions.<br>Ready to view your final score and complete answer key?`;
+      }
+
+      document.getElementById("submit-modal").classList.remove("hidden");
+    }
+
+    function closeSubmitConfirm() {
+      document.getElementById("submit-modal").classList.add("hidden");
+    }
+
+    function finishExam(autoSubmitted) {
+      closeSubmitConfirm();
+      clearInterval(timerId);
+
+      const elapsedSeconds = Math.min(30 * 60, Math.round((Date.now() - examStartTime) / 1000));
+      let correctCount = 0;
+
+      activeQuestions.forEach((item, idx) => {
+        if (answers[idx] === item.answer) correctCount++;
+      });
+
+      const total = activeQuestions.length;
+      const wrongCount = total - correctCount;
+      const pct = Math.round((correctCount / total) * 100);
+
+      let gradeLabel = "";
+      let gradeClasses = "";
+      if (pct >= 85) {
+        gradeLabel = "Excellent 🌟";
+        gradeClasses = "bg-emerald-100 text-emerald-800";
+      } else if (pct >= 75) {
+        gradeLabel = "Very Good 👍";
+        gradeClasses = "bg-teal-100 text-teal-800";
+      } else if (pct >= 60) {
+        gradeLabel = "Good ✓";
+        gradeClasses = "bg-amber-100 text-amber-800";
+      } else {
+        gradeLabel = "Needs Review 📚";
+        gradeClasses = "bg-rose-100 text-rose-800";
+      }
+
+      document.getElementById("exam-screen").classList.add("hidden");
+      document.getElementById("results-screen").classList.remove("hidden");
+
+      document.getElementById("result-status-pill").textContent = autoSubmitted
+        ? "Time Expired — Auto Submitted"
+        : "Exam Completed";
+      document.getElementById("result-candidate-name").textContent = candidateName;
+      document.getElementById("result-score-fraction").textContent = `${correctCount} / ${total}`;
+      document.getElementById("result-score-percent").textContent = `${pct}%`;
+
+      const gradeEl = document.getElementById("result-grade-badge");
+      gradeEl.textContent = gradeLabel;
+      gradeEl.className = `inline-block px-5 py-1.5 rounded-full text-sm font-extrabold ${gradeClasses}`;
+
+      document.getElementById("result-correct-stat").textContent = `✔ Correct: ${correctCount}`;
+      document.getElementById("result-wrong-stat").textContent = `✖ Incorrect: ${wrongCount}`;
+      document.getElementById("result-time-stat").textContent = `⏱ Time: ${formatTime(elapsedSeconds)}`;
+
+      document.getElementById("rev-wrong-btn").textContent = `Incorrect Only (${wrongCount})`;
+      document.getElementById("rev-correct-btn").textContent = `Correct Only (${correctCount})`;
+
+      // Reset filter button active state
+      document.querySelectorAll(".rev-filter-btn").forEach((b, i) => {
+        if (i === 0) {
+          b.className = "rev-filter-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-navy-900 text-white cursor-pointer";
+        } else {
+          b.className = "rev-filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+        }
+      });
+
+      renderReviewList("all");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function setReviewFilter(mode, clickedBtn) {
+      document.querySelectorAll(".rev-filter-btn").forEach((btn) => {
+        btn.className = "rev-filter-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 cursor-pointer";
+      });
+      clickedBtn.className = "rev-filter-btn active px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-navy-900 text-white cursor-pointer";
+      renderReviewList(mode);
+    }
+
+    function renderReviewList(mode) {
+      const list = document.getElementById("review-list");
+      list.innerHTML = "";
+
+      let shown = 0;
+      activeQuestions.forEach((item, idx) => {
+        const chosen = answers[idx];
+        const isCorrect = chosen === item.answer;
+
+        if (mode === "wrong" && isCorrect) return;
+        if (mode === "correct" && !isCorrect) return;
+        shown++;
+
+        const badgeHTML = isCorrect
+          ? `<span class="px-3 py-1 rounded-lg bg-emerald-100 text-emerald-700 text-xs font-extrabold">✔ Correct</span>`
+          : chosen === undefined
+          ? `<span class="px-3 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-extrabold">⚪ Unanswered</span>`
+          : `<span class="px-3 py-1 rounded-lg bg-rose-100 text-rose-700 text-xs font-extrabold">✖ Incorrect</span>`;
+
+        const optionsHTML = item.options
+          .map((opt, oIdx) => {
+            let rowClass = "border-slate-200 bg-white text-slate-700";
+            let tag = "";
+
+            if (oIdx === item.answer) {
+              rowClass = "border-emerald-500 bg-emerald-50 text-emerald-950 font-semibold";
+              tag = `<span class="text-xs font-extrabold text-emerald-700 shrink-0">✔ Correct Answer</span>`;
+            } else if (oIdx === chosen && chosen !== item.answer) {
+              rowClass = "border-rose-500 bg-rose-50 text-rose-950 font-semibold";
+              tag = `<span class="text-xs font-extrabold text-rose-700 shrink-0">✖ Your Choice</span>`;
+            }
+
+            return `
+              <div class="p-3.5 rounded-xl border-2 flex items-center justify-between gap-3 text-sm ${rowClass}">
+                <div><strong class="mr-1.5">${OPTION_LABELS[oIdx]}.</strong> ${opt}</div>
+                ${tag}
+              </div>
+            `;
+          })
+          .join("");
+
+        const card = document.createElement("div");
+        card.className = "bg-white rounded-2xl shadow-sm border border-slate-200 p-5 sm:p-6";
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-100">
+            <span class="px-3 py-1 rounded-lg bg-navy-900 text-white text-xs font-bold">Question ${idx + 1}</span>
+            ${badgeHTML}
+          </div>
+          <p class="font-bold text-navy-900 text-base mb-4 leading-relaxed">${item.q}</p>
+          <div class="space-y-2.5 mb-4">
+            ${optionsHTML}
+          </div>
+          <div class="bg-slate-50 border-l-4 border-teal-600 rounded-r-xl p-3.5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+            <strong class="text-navy-900">💡 Explanation:</strong> ${item.explanation}
+          </div>
+        `;
+        list.appendChild(card);
+      });
+
+      if (shown === 0) {
+        list.innerHTML = `
+          <div class="bg-white rounded-2xl border border-slate-200 p-8 text-center text-slate-500 font-medium">
+            No questions found under this filter.
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>
